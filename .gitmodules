@@ -1,0 +1,3 @@
+[submodule "CnS-backend"]
+	path = CnS-backend
+	url = https://github.com/CnS-project/CnS-backend

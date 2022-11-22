@@ -7,7 +7,7 @@ use db;
 
 CREATE TABLE `students` (
                             `student_id`	INT(9)	NOT NULL,
-                            `email`	VARCHAR(15)	NOT NULL,
+                            `email`	VARCHAR(30)	NOT NULL,
                             `password`	VARCHAR(20)	NOT NULL,
                             `name`	VARCHAR(15)	NOT NULL,
                             `grade`	INT(1)	NOT NULL,
@@ -15,17 +15,18 @@ CREATE TABLE `students` (
 );
 
 CREATE TABLE `course` (
-                          `course_id`	BIGINT	NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                    	  `course_id`	VARCHAR(5)	NOT NULL,
                           `target_grade`	INT(1)	NOT NULL,
                           `credit`	INT(1)	NOT NULL,
                           `name`	VARCHAR(20)	NOT NULL,
+                          `course_number`   INT(3) NOT NULL,
                           `class_number`	INT(1)	NOT NULL,
                           `professor`	VARCHAR(20)	NOT NULL,
                           `capacity`	INT(2)	NOT NULL
 );
 
 CREATE TABLE `register_course` (
-                                   `course_id`	BIGINT	NOT NULL,
+                                   `course_id`	VARCHAR(5)	NOT NULL,
                                    `student_id`	INT(9)	NOT NULL
 );
 
@@ -35,7 +36,7 @@ CREATE TABLE `places` (
 );
 
 CREATE TABLE `course_and_place` (
-                                    `course_id`	BIGINT	NOT NULL,
+                                    `course_id`	VARCHAR(5)	NOT NULL,
                                     `place_id`	BIGINT	NOT NULL,
                                     `start_time`	TIME	NOT NULL,
                                     `end_time`	TIME	NOT NULL
@@ -49,6 +50,10 @@ CREATE TABLE `administrator` (
 ALTER TABLE `students` ADD CONSTRAINT `PK_STUDENTS` PRIMARY KEY (
                                                                  `student_id`
     );
+
+ALTER TABLE `course` ADD CONSTRAINT `PK_COURSE` PRIMARY KEY (
+	`course_id`
+);
 
 ALTER TABLE `register_course` ADD CONSTRAINT `PK_REGISTER_COURSE` PRIMARY KEY (
                                                                                `course_id`,
@@ -92,3 +97,7 @@ ALTER TABLE `course_and_place` ADD CONSTRAINT `FK_places_TO_course_and_place_1` 
                          `place_id`
         );
 
+
+INSERT INTO students VALUES (201702041, "test", "test", "test@naver.com", 1, 0);
+INSERT INTO students VALUES (201702042, "test2", "test2", "test2@naver.com", 1, 0);
+INSERT INTO administrator VALUES (202201123, admin);
